@@ -4,3 +4,6 @@ cmake-build-*/
 
 # VS Code
 .vscode/settings.json
+
+# Jetbrains
+.idea/**
