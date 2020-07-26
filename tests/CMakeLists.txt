@@ -1,2 +1,6 @@
-add_executable(test_name main.cpp)
-add_test(test_name test_name)
+macro(construct_test name)
+    add_executable(${name} main.cpp ${ARGN})
+    add_test(${name} ${name})
+endmacro()
+
+construct_test(test_name)
