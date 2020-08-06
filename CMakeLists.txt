@@ -10,6 +10,7 @@ if (${CMAKE_SOURCE_DIR}/conanfile.txt IS_NEWER_THAN ${CMAKE_BINARY_DIR}/conan.lo
 endif ()
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
 
+add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(tests)
 
