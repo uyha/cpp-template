@@ -1,0 +1,8 @@
+[requires]
+catch2/2.13.0
+fmt/7.0.2
+date/2.4.1
+
+[generators]
+cmake_find_package
+cmake_paths
