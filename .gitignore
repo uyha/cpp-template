@@ -7,3 +7,6 @@ cmake-build-*/
 
 # Jetbrains
 .idea/**
+
+# Pipenv
+Pipfile.lock
