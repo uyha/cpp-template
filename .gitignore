@@ -10,3 +10,7 @@ cmake-build-*/
 
 # Pipenv
 Pipfile.lock
+
+# Visual Studio
+.vs/**
+out/**

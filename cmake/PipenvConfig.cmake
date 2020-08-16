@@ -10,7 +10,7 @@ if (NOT Pipenv_FOUND)
     message(STATUS "Fining Pipenv")
     find_program(
             Pipenv_EXECUTABLE
-            Pipenv
+            pipenv
             PATHS ${output}
             REQUIRED
     )

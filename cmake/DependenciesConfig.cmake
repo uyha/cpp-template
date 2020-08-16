@@ -16,12 +16,17 @@ endif ()
 if (${CMAKE_SOURCE_DIR}/conanfile.txt IS_NEWER_THAN ${CMAKE_BINARY_DIR}/conan.lock)
     message(STATUS "Installing dependencies from conanfile.txt")
     execute_process(
-            COMMAND ${Pipenv_EXECUTABLE} run conan install ${CMAKE_SOURCE_DIR} -if ${CMAKE_BINARY_DIR}
+            # build_type needs to be specified so MSVC can link
+            COMMAND ${Pipenv_EXECUTABLE} run conan install ${CMAKE_SOURCE_DIR} -if ${CMAKE_BINARY_DIR} -s build_type=${CMAKE_BUILD_TYPE}
             RESULT_VARIABLE error
             ERROR_VARIABLE error_message
     )
     if (error)
-        message(FATAL_ERROR "${error}")
+        if (error_message)
+            message(FATAL_ERROR "${error_message}")
+        else ()
+            message(FATAL_ERROR "${error}")
+        endif ()
     endif ()
 endif ()
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
