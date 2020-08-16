@@ -1,13 +1,18 @@
 find_package(Pipenv REQUIRED CONFIG)
 
-set(ENV{PIPENV_IGNORE_VIRTUALENVS} 1)
-
-# Because Visual Studio sets the working directory to the build directory,
-# hence running pipenv will create a default Pipfile if there is not a 
-# Pipfile already there
-if(${CMAKE_SOURCE_DIR}/Pipfile IS_NEWER_THAN ${CMAKE_BINARY_DIR}/Pipfile)
-  file(COPY ${CMAKE_SOURCE_DIR}/Pipfile DESTINATION ${CMAKE_BINARY_DIR})
-endif()
+# Compare to see if the content of Pipfile in the build directory is different
+# than the one in the source directory. If they are different, then copy the
+# Pipfile in the source directory to the build directory.
+execute_process(
+        COMMAND ${CMAKE_COMMAND} -E compare_files --ignore-eol ${CMAKE_SOURCE_DIR}/Pipfile ${CMAKE_BINARY_DIR}/Pipfile
+        RESULT_VARIABLE different_pipfile
+        OUTPUT_QUIET
+        ERROR_QUIET
+)
+if (different_pipfile)
+    message(STATUS "Copying Pipfile to ${CMAKE_BINARY_DIR}")
+    file(COPY ${CMAKE_SOURCE_DIR}/Pipfile DESTINATION ${CMAKE_BINARY_DIR})
+endif ()
 
 # If the build directory Pipfile gets changed after Pipfile.lock is generated,
 # rerun pipenv install to make sure they are in sync
