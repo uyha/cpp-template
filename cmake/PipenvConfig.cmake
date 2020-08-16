@@ -6,7 +6,7 @@ if (NOT Pipenv_FOUND)
             OUTPUT_VARIABLE python_root
     )
 
-    message(STATUS "Fining Pipenv")
+    message(STATUS "Finding Pipenv")
     find_program(
             Pipenv_EXECUTABLE
             pipenv
