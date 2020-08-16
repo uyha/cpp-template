@@ -1,4 +1,4 @@
-if (NOT DEFINED pipenv_EXECUTABLE)
+if (NOT Pipenv_FOUND)
     find_package(Python REQUIRED)
 
     execute_process(
@@ -7,13 +7,14 @@ if (NOT DEFINED pipenv_EXECUTABLE)
             OUTPUT_VARIABLE output
             ERROR_VARIABLE error
     )
-    message(STATUS "Fining pipenv")
+    message(STATUS "Fining Pipenv")
     find_program(
-            pipenv_EXECUTABLE
-            pipenv
+            Pipenv_EXECUTABLE
+            Pipenv
             PATHS ${output}
             REQUIRED
     )
-    message(STATUS "Found pipenv at ${pipenv_EXECUTABLE}")
-    set(pipenv_EXECUTABLE "${pipenv_EXECUTABLE}" CACHE INTERNAL "")
+    message(STATUS "Found Pipenv at ${Pipenv_EXECUTABLE}")
+    set(Pipenv_EXECUTABLE "${Pipenv_EXECUTABLE}" CACHE INTERNAL "")
+    set(Pipenv_FOUND TRUE CACHE INTERNAL "")
 endif ()
