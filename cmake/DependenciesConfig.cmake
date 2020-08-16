@@ -9,7 +9,9 @@ if(${CMAKE_SOURCE_DIR}/Pipfile IS_NEWER_THAN ${CMAKE_BINARY_DIR}/Pipfile)
   file(COPY ${CMAKE_SOURCE_DIR}/Pipfile DESTINATION ${CMAKE_BINARY_DIR})
 endif()
 
-if (${CMAKE_SOURCE_DIR}/Pipfile IS_NEWER_THAN ${CMAKE_SOURCE_DIR}/Pipfile.lock)
+# If the build directory Pipfile gets changed after Pipfile.lock is generated,
+# rerun pipenv install to make sure they are in sync
+if (${CMAKE_BINARY_DIR}/Pipfile IS_NEWER_THAN ${CMAKE_BINARY_DIR}/Pipfile.lock)
     message(STATUS "Installing python requirements from Pipfile")
     execute_process(
             COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${Pipenv_EXECUTABLE} install
@@ -21,6 +23,8 @@ if (${CMAKE_SOURCE_DIR}/Pipfile IS_NEWER_THAN ${CMAKE_SOURCE_DIR}/Pipfile.lock)
     endif ()
 endif ()
 
+# If the source directory conanfile gets changed after conan.lock in the build
+# directory is generated, rerun pipenv install to make sure they are in sync
 if (${CMAKE_SOURCE_DIR}/conanfile.txt IS_NEWER_THAN ${CMAKE_BINARY_DIR}/conan.lock)
     message(STATUS "Installing dependencies from conanfile.txt")
     execute_process(
@@ -38,3 +42,8 @@ if (${CMAKE_SOURCE_DIR}/conanfile.txt IS_NEWER_THAN ${CMAKE_BINARY_DIR}/conan.lo
     endif ()
 endif ()
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
+set_property(
+        DIRECTORY
+        APPEND
+        PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/Pipfile ${CMAKE_SOURCE_DIR}/conanfile.txt
+)
