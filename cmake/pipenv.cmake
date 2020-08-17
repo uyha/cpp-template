@@ -5,20 +5,26 @@ if (NOT PIPENV_FOUND)
             COMMAND ${Python_EXECUTABLE} -c "import sys; print(sys.prefix)"
             OUTPUT_VARIABLE python_root
     )
-
+    string(STRIP ${python_root} python_root)
     message(STATUS "Finding pipenv")
     find_program(
             PIPENV_EXECUTABLE
             pipenv
-            PATHS ${python_root}
+            PATHS ${python_root}/Scripts ${python_root}/bin
+            NO_DEFAULT_PATH
+            NO_PACKAGE_ROOT_PATH
+            NO_CMAKE_PATH
+            NO_CMAKE_ENVIRONMENT_PATH
+            NO_SYSTEM_ENVIRONMENT_PATH
+            NO_CMAKE_SYSTEM_PATH
     )
 
-    if (PIPENV_EXECUTABLE_NOTFOUND)
+    if (PIPENV_EXECUTABLE STREQUAL PIPENV_EXECUTABLE-NOTFOUND)
         message(WARNING "pipenv could not be found at ${python_root}, please make sure it is installed")
         return()
     endif ()
 
-    message(STATUS "Found pipenv at ${PIPENV_EXECUTABLE}")
+    message(STATUS "Found pipenv: ${PIPENV_EXECUTABLE}")
     set(PIPENV_EXECUTABLE "${PIPENV_EXECUTABLE}" CACHE INTERNAL "")
     set(PIPENV_FOUND TRUE CACHE INTERNAL "")
 endif ()
@@ -38,7 +44,7 @@ function(pipenv_install)
             ERROR_QUIET
     )
     if (different_pipfile)
-        message(STATUS "Copying Pipfile to ${CMAKE_BINARY_DIR}")
+        message(DEBUG "Copying Pipfile to ${CMAKE_BINARY_DIR}")
         file(COPY ${CMAKE_SOURCE_DIR}/Pipfile DESTINATION ${CMAKE_BINARY_DIR})
     endif ()
 
@@ -50,6 +56,8 @@ function(pipenv_install)
                 COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${PIPENV_EXECUTABLE} install
                 RESULT_VARIABLE error
                 ERROR_VARIABLE error_message
+                OUTPUT_QUIET
+                ERROR_QUIET
         )
         if (error)
             if (error_message)
@@ -65,12 +73,4 @@ function(pipenv_install)
     )
     string(STRIP ${pipenv_root} pipenv_root)
     set(PIPENV_ROOT ${pipenv_root} CACHE INTERNAL "")
-endfunction()
-
-function(pipenv_watch)
-    set_property(
-            DIRECTORY
-            APPEND
-            PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/Pipfile
-    )
 endfunction()
