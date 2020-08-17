@@ -13,6 +13,11 @@ This is a template to start a new C++ project with dependency management built
 ## Usage
 Just clone or download the project and start coding.
 
+Users are encouraged to learn a bit about how [conan](https://docs.conan.io/en/latest/getting_started.html)
+ works to better understand the `conanfile.txt` and how to add more
+ dependencies.
+
+### Miscellaneous
 To opt out of using `pipenv` for finding `conan`, delete the Pipfile at the
  project's root.
  
