@@ -1,34 +1,3 @@
-if (NOT PIPENV_FOUND)
-    find_package(Python REQUIRED)
-
-    execute_process(
-            COMMAND ${Python_EXECUTABLE} -c "import sys; print(sys.prefix)"
-            OUTPUT_VARIABLE python_root
-    )
-    string(STRIP ${python_root} python_root)
-    message(STATUS "Finding pipenv")
-    find_program(
-            PIPENV_EXECUTABLE
-            pipenv
-            PATHS ${python_root}/Scripts ${python_root}/bin
-            NO_DEFAULT_PATH
-            NO_PACKAGE_ROOT_PATH
-            NO_CMAKE_PATH
-            NO_CMAKE_ENVIRONMENT_PATH
-            NO_SYSTEM_ENVIRONMENT_PATH
-            NO_CMAKE_SYSTEM_PATH
-    )
-
-    if (PIPENV_EXECUTABLE STREQUAL PIPENV_EXECUTABLE-NOTFOUND)
-        message(WARNING "pipenv could not be found at ${python_root}, please make sure it is installed")
-        return()
-    endif ()
-
-    message(STATUS "Found pipenv: ${PIPENV_EXECUTABLE}")
-    set(PIPENV_EXECUTABLE "${PIPENV_EXECUTABLE}" CACHE INTERNAL "")
-    set(PIPENV_FOUND TRUE CACHE INTERNAL "")
-endif ()
-
 function(pipenv_install)
     if (NOT PIPENV_FOUND)
         message(WARNING "pipenv is not found, aborting pipenv install")
@@ -74,3 +43,32 @@ function(pipenv_install)
     string(STRIP ${pipenv_root} pipenv_root)
     set(PIPENV_ROOT ${pipenv_root} CACHE INTERNAL "")
 endfunction()
+
+if (NOT PIPENV_FOUND)
+    find_package(Python REQUIRED)
+    execute_process(
+            COMMAND ${Python_EXECUTABLE} -c "import sys; print(sys.prefix)"
+            OUTPUT_VARIABLE python_root
+    )
+    string(STRIP ${python_root} python_root)
+    message(STATUS "Finding pipenv in ${python_root}")
+    find_program(
+            PIPENV_EXECUTABLE
+            pipenv
+            HINTS ${python_root}/Scripts ${python_root}/bin
+            NO_DEFAULT_PATH
+            NO_PACKAGE_ROOT_PATH
+            NO_CMAKE_PATH
+            NO_CMAKE_ENVIRONMENT_PATH
+            NO_SYSTEM_ENVIRONMENT_PATH
+            NO_CMAKE_SYSTEM_PATH
+    )
+    if (PIPENV_EXECUTABLE STREQUAL PIPENV_EXECUTABLE-NOTFOUND)
+        message(WARNING "pipenv could not be found at ${python_root}, please make sure it is installed")
+        return()
+    endif ()
+
+    message(STATUS "Found pipenv: ${PIPENV_EXECUTABLE}")
+    set(PIPENV_EXECUTABLE "${PIPENV_EXECUTABLE}" CACHE INTERNAL "")
+    set(PIPENV_FOUND TRUE CACHE INTERNAL "")
+endif ()

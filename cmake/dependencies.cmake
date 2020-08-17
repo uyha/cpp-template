@@ -22,7 +22,13 @@ function(find_conan_via_pipenv out)
     include(pipenv OPTIONAL RESULT_VARIABLE pipenv)
 
     if (pipenv STREQUAL pipenv-NOTFOUND)
-        message(WARNING "pipenv is not found, conan will not be searched")
+        message(WARNING "pipenv CMake module is not found, conan will not be searched")
+        return()
+    endif ()
+
+    found(pipenv_found PIPENV_EXECUTABLE)
+    if (NOT pipenv_found)
+        message(DEBUG "pipenv is not found, abort searching conan using pipenv")
         return()
     endif ()
 
@@ -32,7 +38,7 @@ function(find_conan_via_pipenv out)
 
     find_program(
             CONAN_CMD conan
-            PATHS ${PIPENV_ROOT}/Scripts ${PIPENV_ROOT}/bin
+            HINTS ${PIPENV_ROOT}/Scripts ${PIPENV_ROOT}/bin
             NO_DEFAULT_PATH
             NO_PACKAGE_ROOT_PATH
             NO_CMAKE_PATH
@@ -40,8 +46,11 @@ function(find_conan_via_pipenv out)
             NO_SYSTEM_ENVIRONMENT_PATH
             NO_CMAKE_SYSTEM_PATH
     )
-    message(STATUS "conan found at ${CONAN_CMD}")
-    set(${out} ${CONAN_CMD} PARENT_SCOPE)
+    found(conan_found CONAN_CMD)
+    if (conan_found)
+        message(STATUS "conan found at ${CONAN_CMD}")
+        set(${out} ${CONAN_CMD} PARENT_SCOPE)
+    endif ()
 endfunction()
 
 macro(conan_cache_if_found)
@@ -53,10 +62,10 @@ macro(conan_cache_if_found)
 endmacro()
 
 function(find_conan)
-    message(DEBUG "Checking cache")
+    message(DEBUG "Checking conan cache")
     conan_cache_if_found()
 
-    message(DEBUG "Finding normally")
+    message(DEBUG "Finding conan normally")
     find_program(CONAN_CMD conan)
     conan_cache_if_found()
 
@@ -64,7 +73,7 @@ function(find_conan)
         message(DEBUG "No Pipfile in project's root, implicitly opting out of using pipenv to find conan")
         return()
     endif ()
-    message(DEBUG "Finding via pipenv")
+    message(DEBUG "Finding conan via pipenv")
     find_conan_via_pipenv(CONAN_CMD)
     found(conan_found CONAN_CMD)
     if (conan_found)
@@ -79,14 +88,27 @@ if (NOT EXISTS ${CMAKE_BINARY_DIR}/conan.cmake)
             "${CMAKE_BINARY_DIR}/conan.cmake")
 endif ()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
+
 if (${CMAKE_SOURCE_DIR}/conanfile.txt IS_NEWER_THAN ${CMAKE_BINARY_DIR}/conan.lock)
     find_conan()
+    found(conan_found CONAN_CMD)
+    if (NOT conan_found)
+        message(WARNING "Aborting conan configuration, conan is not found, please make sure it is installed")
+        return()
+    endif ()
+
+    if (NOT CMAKE_BUILD_TYPE)
+        message(STATUS "CMAKE_BUILD_TYPE is not specified, defaulting to Debug")
+        set(CMAKE_BUILD_TYPE Debug)
+    endif ()
+
     conan_cmake_run(
             CONANFILE conanfile.txt
             BUILD missing
     )
     watch(${CMAKE_SOURCE_DIR}/conanfile.txt)
 endif ()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_BINARY_DIR})
 set(CONAN_CMAKE_SILENT_OUTPUT TRUE)
 

@@ -13,3 +13,11 @@ function(watch)
             PROPERTY CMAKE_CONFIGURE_DEPENDS ${ARGV}
     )
 endfunction()
+
+function(get_home_path out)
+    if (DEFINED ENV{HOME})
+        set(${out} $ENV{HOME} PARENT_SCOPE)
+    else ()
+        set(${out} $ENV{HOMEDRIVE}$ENV{HOMEPATH} PARENT_SCOPE)
+    endif ()
+endfunction()
