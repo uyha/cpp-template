@@ -15,5 +15,8 @@ Just clone or download the project and start coding.
 
 To opt out of using `pipenv` for finding `conan`, delete the Pipfile at the
  project's root.
+ 
+Provide `Python_ROOT_DIR` if `conan` is installed using `pip` so `conan` can
+ be found automatically.
 
 [Pitchfork]: https://api.csswg.org/bikeshed/?force=1&url=https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs

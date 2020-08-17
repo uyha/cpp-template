@@ -66,7 +66,10 @@ function(find_conan)
     conan_cache_if_found()
 
     message(DEBUG "Finding conan normally")
-    find_program(CONAN_CMD conan)
+    find_program(
+            CONAN_CMD conan
+            HINTS ${Python_ROOT_DIR}/Scripts ${Python_ROOT_DIR}/bin
+    )
     conan_cache_if_found()
 
     if (NOT EXISTS ${CMAKE_SOURCE_DIR}/Pipfile)
