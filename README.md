@@ -11,7 +11,8 @@ This is a template to start a new C++ project with dependency management built
 * `conan`
 
 ## Usage
-Just clone or download the project and start coding.
+Just clone/download the project or click the [Use this template](https://github.com/uyha/cpp_template/generate)
+ button if you're using Github as your git hosting site and start coding.
 
 Users are encouraged to learn a bit about how [conan](https://docs.conan.io/en/latest/getting_started.html)
  works to better understand the `conanfile.txt` and how to add more
