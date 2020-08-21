@@ -32,8 +32,6 @@ function(find_conan_via_pipenv out)
         return()
     endif ()
 
-    message(DEBUG "Running pipenv install")
-    pipenv_install()
     message(STATUS "Finding conan in ${PIPENV_ROOT}")
 
     find_program(
@@ -65,24 +63,25 @@ function(find_conan)
     message(DEBUG "Checking conan cache")
     conan_cache_if_found()
 
+    if (NOT EXISTS ${CMAKE_SOURCE_DIR}/Pipfile)
+        message(DEBUG "No Pipfile in project's root, implicitly opting out of using pipenv to find conan")
+        return()
+    else ()
+        message(DEBUG "Finding conan via pipenv")
+        find_conan_via_pipenv(CONAN_CMD)
+        found(conan_found CONAN_CMD)
+        if (conan_found)
+            conan_cache(${CONAN_CMD})
+            watch(${CMAKE_SOURCE_DIR}/Pipfile)
+        endif ()
+    endif ()
+
     message(DEBUG "Finding conan normally")
     find_program(
             CONAN_CMD conan
             HINTS ${Python_ROOT_DIR}/Scripts ${Python_ROOT_DIR}/bin
     )
     conan_cache_if_found()
-
-    if (NOT EXISTS ${CMAKE_SOURCE_DIR}/Pipfile)
-        message(DEBUG "No Pipfile in project's root, implicitly opting out of using pipenv to find conan")
-        return()
-    endif ()
-    message(DEBUG "Finding conan via pipenv")
-    find_conan_via_pipenv(CONAN_CMD)
-    found(conan_found CONAN_CMD)
-    if (conan_found)
-        conan_cache(${CONAN_CMD})
-        watch(${CMAKE_SOURCE_DIR}/Pipfile)
-    endif ()
 endfunction()
 
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/conan.cmake)

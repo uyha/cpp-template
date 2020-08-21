@@ -71,4 +71,8 @@ if (NOT PIPENV_FOUND)
     message(STATUS "Found pipenv: ${PIPENV_EXECUTABLE}")
     set(PIPENV_EXECUTABLE "${PIPENV_EXECUTABLE}" CACHE INTERNAL "")
     set(PIPENV_FOUND TRUE CACHE INTERNAL "")
+
+    if (EXISTS ${CMAKE_SOURCE_DIR}/Pipfile)
+        pipenv_install()
+    endif ()
 endif ()
