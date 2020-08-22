@@ -65,7 +65,6 @@ function(find_conan)
 
     if (NOT EXISTS ${CMAKE_SOURCE_DIR}/Pipfile)
         message(DEBUG "No Pipfile in project's root, implicitly opting out of using pipenv to find conan")
-        return()
     else ()
         message(DEBUG "Finding conan via pipenv")
         find_conan_via_pipenv(CONAN_CMD)
