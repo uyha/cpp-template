@@ -45,6 +45,8 @@ function(pipenv_install)
 endfunction()
 
 if (NOT PIPENV_FOUND)
+    include(${CMAKE_CURRENT_LIST_DIR}/utilities.cmake)
+    get_home_path(home)
     find_package(Python REQUIRED)
     execute_process(
             COMMAND ${Python_EXECUTABLE} -c "import sys; print(sys.prefix)"
@@ -54,7 +56,7 @@ if (NOT PIPENV_FOUND)
     set(pipenv_search_path 
             ${python_root}/Scripts 
             ${python_root}/bin
-            $ENV{HOME}/.local/bin)
+            ${home}/.local/bin)
           message(DEBUG "Finding pipenv in ${pipenv_search_path}")
     find_program(
             PIPENV_EXECUTABLE
