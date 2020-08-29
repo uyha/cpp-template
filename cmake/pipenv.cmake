@@ -55,7 +55,9 @@ if (NOT PIPENV_FOUND)
     find_program(
             PIPENV_EXECUTABLE
             pipenv
-            HINTS ${python_root}/Scripts ${python_root}/bin
+            HINTS 
+            ${python_root}/Scripts ${python_root}/bin
+            $ENV{HOME}/.local/bin
             NO_DEFAULT_PATH
             NO_PACKAGE_ROOT_PATH
             NO_CMAKE_PATH
