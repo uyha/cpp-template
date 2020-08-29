@@ -14,4 +14,4 @@ jobs:
     - name: install pipenv
       run: python3 -m pip install pipenv
     - name: CMake configuration
-      run: cmake -DCMAKE_MESSAGE_LOG_LEVEL=DEBUG -B $HOME/build $GITHUB_WORKSPACE
+      run: cmake -B $HOME/build $GITHUB_WORKSPACE
