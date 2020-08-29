@@ -51,13 +51,15 @@ if (NOT PIPENV_FOUND)
             OUTPUT_VARIABLE python_root
     )
     string(STRIP ${python_root} python_root)
-    message(STATUS "Finding pipenv in ${python_root}")
+    set(pipenv_search_path 
+            ${python_root}/Scripts 
+            ${python_root}/bin
+            $ENV{HOME}/.local/bin)
+          message(DEBUG "Finding pipenv in ${pipenv_search_path}")
     find_program(
             PIPENV_EXECUTABLE
             pipenv
-            HINTS 
-            ${python_root}/Scripts ${python_root}/bin
-            $ENV{HOME}/.local/bin
+            HINTS ${pipenv_search_path}
             NO_DEFAULT_PATH
             NO_PACKAGE_ROOT_PATH
             NO_CMAKE_PATH
