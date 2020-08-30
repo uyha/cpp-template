@@ -1,3 +1,4 @@
+include(CTest)
 find_package(Catch2)
 
 macro(construct_test name)
