@@ -17,6 +17,8 @@ jobs:
       run: cmake -B $HOME/build $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=RELEASE
     - name: Build
       run: cmake --build $HOME/build --config release
+    - name: List build content
+      run: ls $HOME/build
     - name: Run tests
       run: ctest
       working-directory: $HOME/build/tests
