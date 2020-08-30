@@ -4,6 +4,7 @@ project("ProjectName"
         # There is a bug in conan.cmake that make libraries fail to build if LANGUAGES is specified with only CXX
         LANGUAGES C CXX)
 
+set(CMAKE_MESSAGE_LOG_LEVEL DEBUG)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 include(pipenv)
 include(dependencies)

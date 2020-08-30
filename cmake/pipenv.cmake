@@ -57,7 +57,7 @@ if (NOT PIPENV_FOUND)
             ${python_root}/Scripts
             ${python_root}/bin
             ${home}/.local/bin
-            ${PIPENV_LOCATION})
+            ${PIPENV_LOCATION} $ENV{PATH})
     message(DEBUG "Finding pipenv in ${pipenv_search_path}")
     find_program(
             PIPENV_EXECUTABLE
