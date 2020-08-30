@@ -53,11 +53,12 @@ if (NOT PIPENV_FOUND)
             OUTPUT_VARIABLE python_root
     )
     string(STRIP ${python_root} python_root)
-    set(pipenv_search_path 
-            ${python_root}/Scripts 
+    set(pipenv_search_path
+            ${python_root}/Scripts
             ${python_root}/bin
-            ${home}/.local/bin)
-          message(DEBUG "Finding pipenv in ${pipenv_search_path}")
+            ${home}/.local/bin
+            ${PIPENV_LOCATION})
+    message(DEBUG "Finding pipenv in ${pipenv_search_path}")
     find_program(
             PIPENV_EXECUTABLE
             pipenv
