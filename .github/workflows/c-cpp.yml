@@ -1,15 +1,16 @@
 name: C/C++ CI
 
-strategy:
-  matrix:
-    os: [ubuntu-20.04, windows-latest]
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  build:
+  build-and-test:
+    name: Build the project and run its tests with CTest
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-latest]
 
     runs-on: ${{ matrix.os }}
 
