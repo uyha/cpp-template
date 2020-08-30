@@ -1,5 +1,9 @@
 name: C/C++ CI
 
+strategy:
+  matrix:
+    os: [ubuntu-20.04, windows-latest]
+
 on:
   push:
     branches: [ master ]
@@ -7,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
@@ -17,10 +21,6 @@ jobs:
       run: cmake -B build $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=RELEASE
     - name: Build
       run: cmake --build build --config release
-    - name: List directories
-      run: ls build
-    - name: List directories
-      run: ls build/tests
     - name: Run tests
       run: ctest
       working-directory: build/tests
