@@ -19,5 +19,5 @@ jobs:
     - name: Build
       run: cmake --build build --config release
     - name: Run tests
-      run: ctest -c release
+      run: ctest -C release
       working-directory: build/tests
