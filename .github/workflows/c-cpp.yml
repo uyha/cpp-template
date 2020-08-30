@@ -14,7 +14,7 @@ jobs:
     - name: install pipenv
       run: python3 -m pip install pipenv
     - name: CMake configuration
-      run: cmake -B $HOME/build $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=RELEASE
+      run: cmake -B build $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=RELEASE
     - name: Build
       run: cmake --build build --config release
     - name: List build content
