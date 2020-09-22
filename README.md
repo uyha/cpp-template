@@ -1,4 +1,5 @@
 # A template for C++ projects
+![C/C++ CI](https://github.com/uyha/cpp_template/workflows/C/C++%20CI/badge.svg)
 
 This is a template to start a new C++ project with dependency management built
  into it. Hence, it is opinionated about how dependency management of a C++ 
