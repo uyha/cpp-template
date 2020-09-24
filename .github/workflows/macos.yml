@@ -4,7 +4,7 @@ on:
     branches: [ master ]
 jobs:
   build-and-test:
-    name: Build the project and run its tests with CTest on macOS
+    name: macOS
     strategy:
       matrix:
         cpp_standard: [ 11, 14, 17, 20 ]
@@ -18,7 +18,7 @@ jobs:
       - name: CMake configuration
         run: >
           cmake -B build $GITHUB_WORKSPACE
-          -DCMAKE_BUILD_TYPE=RELEASE
+          -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_MESSAGE_LOG_LEVEL=DEBUG
           -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}} -DCMAKE_CXX_COMPILER=${{matrix.cpp_compiler}}
       - name: Build
         run: cmake --build build --config release
