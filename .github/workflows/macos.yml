@@ -13,8 +13,8 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v2
-      - name: install pipenv
-        run: brew install pipenv
+      - name: install conan
+        run: brew install conan
       - name: CMake configuration
         run: >
           cmake -B build $GITHUB_WORKSPACE
