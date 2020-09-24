@@ -1,15 +1,15 @@
 name: C/C++ CI
-strategy:
-  matrix:
-    cpp_standard: [ 11, 14, 17, 20 ]
-    cpp_compiler: [ g++-8, g++-9, clang++-8, clang++-9 ]
-    os: [ ubuntu-16.04, ubuntu-18.04, ubuntu-20.04 ]
 on:
   push:
     branches: [ master ]
 jobs:
   build-and-test:
     name: Build the project and run its tests with CTest on Ubuntu
+    strategy:
+      matrix:
+        cpp_standard: [ 11, 14, 17, 20 ]
+        cpp_compiler: [ g++-8, g++-9, clang++-8, clang++-9 ]
+        os: [ ubuntu-16.04, ubuntu-18.04, ubuntu-20.04 ]
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v2

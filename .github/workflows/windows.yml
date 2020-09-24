@@ -1,13 +1,13 @@
 name: C/C++ CI
-strategy:
-  matrix:
-    cpp_standard: [ 11, 14, 17, 20 ]
 on:
   push:
     branches: [ master ]
 jobs:
   build-and-test:
     name: Build the project and run its tests with CTest on Windows
+    strategy:
+      matrix:
+        cpp_standard: [ 11, 14, 17, 20 ]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
