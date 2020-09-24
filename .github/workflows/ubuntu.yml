@@ -4,7 +4,7 @@ on:
     branches: [ master ]
 jobs:
   build-and-test:
-    name: Build the project and run its tests with CTest on Ubuntu
+    name: Ubuntu CI/CD
     strategy:
       matrix:
         cpp_standard: [ 11, 14, 17, 20 ]
