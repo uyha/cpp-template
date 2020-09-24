@@ -16,7 +16,7 @@ jobs:
       - name: install pipenv
         run: python3 -m pip install pipenv
       - name: find pip
-        run: ls /usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8
+        run: ls /usr/local/Cellar/python@3.8/3.8.5/Frameworks/Python.framework/Versions/3.8/bin
       - name: CMake configuration
         run: >
           cmake -B build $GITHUB_WORKSPACE
