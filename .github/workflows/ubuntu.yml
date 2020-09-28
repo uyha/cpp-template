@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: install venv
-        run: apt-get install python3-venv
+        run: sudo apt-get install python3-venv
       - name: install poetry
         run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
       - name: CMake configuration
