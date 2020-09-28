@@ -103,7 +103,7 @@ function(find_conan)
     message(DEBUG "Finding conan normally")
     find_program(
             CONAN_CMD conan
-            HINTS ${Python_ROOT_DIR}/Scripts ${Python_ROOT_DIR}/bin ${CONAN_ROOT_DIR}
+            HINTS ${CONAN_DIR}
     )
 endfunction()
 

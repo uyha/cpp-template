@@ -20,7 +20,7 @@ jobs:
       - name: CMake configuration
         run: >
           cmake -B build $GITHUB_WORKSPACE
-          -DCMAKE_BUILD_TYPE=RELEASE -DPoetry_ROOT_DIR=$HOME/.poetry/bin
+          -DCMAKE_BUILD_TYPE=RELEASE -DPoetry_DIR=$HOME/.poetry/bin
           -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}} -DCMAKE_CXX_COMPILER=${{matrix.cpp_compiler}}
       - name: Build
         run: cmake --build build --config release

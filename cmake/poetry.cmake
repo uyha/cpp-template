@@ -8,9 +8,9 @@ function(find_poetry)
     if (NOT Poetry_FOUND)
         find_program(Poetry poetry
                 HINTS
-                "${Poetry_ROOT_DIR}"
-                "${Poetry_ROOT_DIR}/bin"
-                "${Poetry_ROOT_DIR}/Scripts")
+                "${Poetry_DIR}"
+                "${Poetry_DIR}/bin"
+                "${Poetry_DIR}/Scripts")
     endif ()
     found(Poetry_FOUND Poetry)
     set(Poetry_FOUND ${Poetry_FOUND} CACHE BOOL "")
@@ -18,7 +18,7 @@ function(find_poetry)
         message(STATUS "Found poetry: ${Poetry}")
         set(Poetry_SCRIPT ${Poetry} CACHE FILEPATH "")
     else ()
-        message(STATUS "poetry could not be found, please specify poetry's location by setting -DPoetry_ROOT_DIR=/path/to/poetry")
+        message(STATUS "poetry could not be found, please specify poetry's location by setting -DPoetry_DIR=/path/to/poetry")
     endif ()
 endfunction()
 
