@@ -14,11 +14,11 @@ jobs:
       - name: install poetry
         run: (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python
       - name: check poetry
-        run: Get-ChildItem $env:USERPROFILE\.poetry\bin
+        run: Get-ChildItem $env:USERPROFILE\.poetry
       - name: CMake configuration
         run: >
           cmake -B build $env:GITHUB_WORKSPACE
-          -DPoetry_ROOT_DIR=$env:USERPROFILE\.poetry\bin
+          -DPoetry_ROOT_DIR=$env:USERPROFILE\.poetry -DCMAKE_MESSAGE_LOG_LEVEL=DEBUG
           -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
       - name: Build
         run: cmake --build build --config release
