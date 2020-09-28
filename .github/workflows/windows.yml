@@ -13,6 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: install poetry
         run: (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python
+      - name: check poetry
+        run: Get-Item $env:USERPROFILE\.poetry\bin
       - name: CMake configuration
         run: >
           cmake -B build $env:GITHUB_WORKSPACE
