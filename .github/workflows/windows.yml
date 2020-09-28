@@ -11,15 +11,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: check GITHUB_WORKSPACE
-        run: Write-Output $GITHUB_WORKSPACE
       - name: install poetry
         run: (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python
-      - name: check GITHUB_WORKSPACE
-        run: Write-Output $GITHUB_WORKSPACE
       - name: CMake configuration
         run: >
-          cmake -B build $GITHUB_WORKSPACE
+          cmake -B build $env:GITHUB_WORKSPACE
           -DPoetry_ROOT_DIR=%USERPROFILE%\.poetry\bin
           -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
       - name: Build
