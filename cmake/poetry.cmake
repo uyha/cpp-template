@@ -6,6 +6,7 @@ function(find_poetry)
         return()
     endif ()
     if (NOT Poetry_FOUND)
+        message(DEBUG "Finding poetry at ${Poetry_ROOT_DIR}")
         find_program(Poetry poetry
                 HINTS
                 "${Poetry_ROOT_DIR}"
