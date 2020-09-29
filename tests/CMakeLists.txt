@@ -1,4 +1,6 @@
+include(dependencies)
 include(CTest)
+
 find_package(Catch2)
 find_package(fmt)
 
