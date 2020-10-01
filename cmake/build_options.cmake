@@ -1,0 +1,7 @@
+if (MSVC)
+    set(wae /WX)
+    set(warnings /W4 /w14640)
+else ()
+    set(wae -Werror)
+    set(warnings -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic)
+endif ()
