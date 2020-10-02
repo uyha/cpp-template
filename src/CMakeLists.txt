@@ -1,4 +1,5 @@
 include(build_options)
+include(dependencies)
 
 find_package(fmt)
 
