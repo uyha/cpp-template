@@ -7,10 +7,20 @@ function(found out in)
 endfunction()
 
 function(watch)
+    set(options ";")
+    set(single_values "DIR")
+    set(multi_values "FILES")
+    cmake_parse_arguments(watch "${options}" "${single_values}" "${multi_values}" ${ARGN})
+    if (DEFINED watch_DIR)
+        set(dir ${watch_DIR})
+    else ()
+        set(dir ${CMAKE_CURRENT_SOURCE_DIR})
+    endif ()
+
     set_property(
-            DIRECTORY
+            DIRECTORY ${dir}
             APPEND
-            PROPERTY CMAKE_CONFIGURE_DEPENDS ${ARGV}
+            PROPERTY CMAKE_CONFIGURE_DEPENDS ${watch_FILES}
     )
 endfunction()
 
