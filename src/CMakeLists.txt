@@ -1,5 +1,5 @@
 include(build_options)
-include(dependencies)
+include(use_conan)
 
 find_package(fmt)
 

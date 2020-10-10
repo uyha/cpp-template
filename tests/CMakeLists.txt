@@ -1,5 +1,5 @@
-include(dependencies)
 include(CTest)
+include(use_conan)
 
 find_package(Catch2)
 find_package(fmt)
