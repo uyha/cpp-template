@@ -6,6 +6,25 @@ if (Conan_EXECUTABLE)
         add_executable(Conan::Conan IMPORTED)
         set_target_properties(Conan::Conan PROPERTIES IMPORTED_LOCATION "${Conan_EXECUTABLE}")
     endif ()
+    if (WIN32)
+        execute_process(
+                COMMAND cmd /C ${Conan_EXECUTABLE} --version
+                RESULT_VARIABLE result
+                OUTPUT_VARIABLE version
+        )
+    else ()
+        execute_process(
+                COMMAND ${Conan_EXECUTABLE} --version
+                RESULT_VARIABLE result
+                OUTPUT_VARIABLE version
+        )
+    endif ()
+    if (result EQUAL 0)
+        if (${version} MATCHES ".*version(.*)")
+            string(STRIP ${CMAKE_MATCH_1} Conan_VERSION)
+        endif ()
+    endif ()
+
     function(download_conan_cmake out)
         set(options ";")
         set(single_values DIR)
@@ -31,4 +50,6 @@ if (Conan_EXECUTABLE)
 endif ()
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Conan DEFAULT_MSG Conan_EXECUTABLE)
+find_package_handle_standard_args(Conan
+        REQUIRED_VARS Conan_EXECUTABLE
+        VERSION_VAR Conan_VERSION)
