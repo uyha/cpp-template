@@ -1,8 +1,10 @@
-find_program(Poetry_EXECUTABLE poetry HINTS ${Poetry_DIR})
+find_program(Poetry_EXECUTABLE poetry HINTS ${Poetry_DIR} ${Poetry_DIR}/bin ${Poetry_DIR}/Scripts)
 
-if (Poetry_EXECUTABLE AND NOT Poetry_FOUND)
-    add_executable(Poetry::Poetry IMPORTED)
-    set_target_properties(Poetry::Poetry PROPERTIES IMPORTED_LOCATION "${Poetry_EXECUTABLE}")
+if (Poetry_EXECUTABLE)
+    if (NOT TARGET Poetry::Poetry)
+        add_executable(Poetry::Poetry IMPORTED)
+        set_target_properties(Poetry::Poetry PROPERTIES IMPORTED_LOCATION "${Poetry_EXECUTABLE}")
+    endif ()
     execute_process(
             COMMAND ${Poetry_EXECUTABLE} --version
             RESULT_VARIABLE result
