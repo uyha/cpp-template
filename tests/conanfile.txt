@@ -1,6 +1,6 @@
 [requires]
-catch2/2.13.0
-fmt/7.0.3
+catch2/2.13.4
+fmt/7.1.3
 
 [generators]
 cmake_find_package
