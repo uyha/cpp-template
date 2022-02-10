@@ -36,7 +36,7 @@ if (Conan_EXECUTABLE)
         endif ()
 
         if (NOT EXISTS ${arg_DIR}/conan.cmake)
-            file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.15/conan.cmake"
+            file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/0.17.0/conan.cmake"
                     "${arg_DIR}/conan.cmake"
                     STATUS download_status)
             list(POP_FRONT download_status download_error)
