@@ -1,11 +1,5 @@
 include(utilities)
 
-if (EXISTS ${CMAKE_SOURCE_DIR}/pyproject.toml)
-    include(use_poetry)
-    poetry_path(path DIR ${CMAKE_CURRENT_BINARY_DIR})
-    set(Conan_DIR ${Conan_DIR} ${path}/Scripts ${path}/bin)
-endif ()
-
 find_package(Conan REQUIRED)
 download_conan_cmake(conan_cmake DIR ${CMAKE_BINARY_DIR})
 include(${conan_cmake})
