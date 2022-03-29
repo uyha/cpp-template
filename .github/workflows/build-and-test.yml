@@ -18,6 +18,8 @@ jobs:
     runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v2
+      - name: Install conan
+        run: python3 -m pip install conan
       - name: CMake configuration
         run: >
           cmake -B build $GITHUB_WORKSPACE
@@ -38,6 +40,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install conan
+        run: python3 -m pip install conan
       - name: CMake configuration
         run: >
           cmake -B build $env:GITHUB_WORKSPACE
