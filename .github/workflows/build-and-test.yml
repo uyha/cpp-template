@@ -47,7 +47,7 @@ jobs:
           cmake --preset default
           -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
       - name: Build
-        run: cmake --build --preset default
+        run: cmake --build --preset default --config release
       - name: Run tests
         run: ctest -C release
         working-directory: build/tests
