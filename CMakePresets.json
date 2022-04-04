@@ -8,7 +8,7 @@
   "configurePresets": [{
     "name": "default",
     "displayName": "Default Config",
-    "description": "Default build using Ninja generator",
+    "description": "Default configuration with release build type, testing enabled, and conan used",
     "binaryDir": "${sourceDir}/build",
     "cacheVariables": {
       "CMAKE_BUILD_TYPE": "Release",
