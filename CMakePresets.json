@@ -14,7 +14,9 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CPACK_GENERATOR": "DEB"
+        "CPACK_GENERATOR": "DEB",
+        "BUILD_TESTING": "ON",
+        "USE_CONAN": "ON"
       },
       "environment": {
       }

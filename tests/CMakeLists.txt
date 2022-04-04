@@ -1,6 +1,9 @@
 include(CTest)
-include(use_conan)
 include(build_options)
+
+if(USE_CONAN)
+  include(use_conan)
+endif()
 
 find_package(Catch2)
 find_package(fmt)

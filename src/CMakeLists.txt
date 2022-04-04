@@ -1,5 +1,8 @@
 include(build_options)
-include(use_conan)
+
+if(USE_CONAN)
+  include(use_conan)
+endif()
 
 find_package(fmt)
 
