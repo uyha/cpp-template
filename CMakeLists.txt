@@ -7,6 +7,4 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 add_subdirectory(external)
 add_subdirectory(src)
-if(BUILD_TESTING)
-  add_subdirectory(tests)
-endif()
+add_subdirectory(tests)

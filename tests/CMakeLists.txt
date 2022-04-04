@@ -1,4 +1,8 @@
 include(CTest)
+if(NOT BUILD_TESTING)
+  return()
+endif()
+
 include(build_options)
 
 if(USE_CONAN)
