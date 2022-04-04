@@ -5,28 +5,20 @@
     "minor": 21,
     "patch": 0
   },
-  "configurePresets": [
-    {
-      "name": "default",
-      "displayName": "Default Config",
-      "description": "Default build using Ninja generator",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CPACK_GENERATOR": "DEB",
-        "BUILD_TESTING": "ON",
-        "USE_CONAN": "ON"
-      },
-      "environment": {
-      }
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "default",
-      "configurePreset": "default"
-    }
-  ]
+  "configurePresets": [{
+    "name": "default",
+    "displayName": "Default Config",
+    "description": "Default build using Ninja generator",
+    "binaryDir": "${sourceDir}/build",
+    "cacheVariables": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "BUILD_TESTING": "ON",
+      "USE_CONAN": "ON"
+    },
+    "environment": {}
+  }],
+  "buildPresets": [{
+    "name": "default",
+    "configurePreset": "default"
+  }]
 }
-
