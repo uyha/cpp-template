@@ -22,12 +22,12 @@ jobs:
         run: python3 -m pip install conan
       - name: CMake configuration
         run: >
-          cmake -B build $GITHUB_WORKSPACE
+          cmake --preset default
           -DCMAKE_BUILD_TYPE=RELEASE
           -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
           -DCMAKE_C_COMPILER=${{matrix.compiler.cc}} -DCMAKE_CXX_COMPILER=${{matrix.compiler.cxx}}
       - name: Build
-        run: cmake --build build --config release
+        run: cmake --build --preset default
       - name: Run tests
         run: ctest
         working-directory: build/tests
@@ -44,11 +44,10 @@ jobs:
         run: python3 -m pip install conan
       - name: CMake configuration
         run: >
-          cmake -B build $env:GITHUB_WORKSPACE
-          -DPoetry_DIR="$env:USERPROFILE\.poetry\bin"
+          cmake --preset default
           -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
       - name: Build
-        run: cmake --build build --config release
+        run: cmake --build --preset default
       - name: Run tests
         run: ctest -C release
         working-directory: build/tests
