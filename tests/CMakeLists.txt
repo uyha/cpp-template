@@ -3,11 +3,8 @@ if(NOT BUILD_TESTING)
   return()
 endif()
 
-include(build_options)
-
-if(USE_CONAN)
-  include(use_conan)
-endif()
+include(CompileOptions)
+include(Conan)
 
 find_package(Catch2)
 find_package(fmt)
