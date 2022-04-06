@@ -44,6 +44,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install conan
         run: python3 -m pip install conan
+      - name: Pull CMake modules
+        run: |
+          Start-BitsTransfer -Source https://raw.githubusercontent.com/uyha/cmake-modules/master/tools/pull-modules.ps1 -Destination pull-modules.ps1
+          pwsh pull-modules.ps1
       - name: CMake configuration
         run: >
           cmake --preset default
