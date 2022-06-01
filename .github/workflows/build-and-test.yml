@@ -24,15 +24,14 @@ jobs:
         run: curl -L https://raw.githubusercontent.com/uyha/cmake-modules/master/tools/pull-modules.sh | bash
       - name: CMake configuration
         run: >
-          cmake --preset default
-          -DCMAKE_BUILD_TYPE=RELEASE
+          cmake --preset debug
           -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
           -DCMAKE_C_COMPILER=${{matrix.compiler.cc}} -DCMAKE_CXX_COMPILER=${{matrix.compiler.cxx}}
       - name: Build
-        run: cmake --build --preset default
+        run: cmake --build --preset debug
       - name: Run tests
         run: ctest
-        working-directory: build/tests
+        working-directory: cmake-build-debug/tests
 
   windows:
     name: Windows
@@ -50,10 +49,10 @@ jobs:
           pwsh pull-modules.ps1
       - name: CMake configuration
         run: >
-          cmake --preset default
-          -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
+          cmake --preset debug
+          -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
       - name: Build
-        run: cmake --build --preset default --config release
+        run: cmake --build --preset debug
       - name: Run tests
-        run: ctest -C release
-        working-directory: build/tests
+        run: ctest -C debug
+        working-directory: cmake-build-debug/tests
