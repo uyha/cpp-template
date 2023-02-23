@@ -11,7 +11,7 @@ find_package(fmt REQUIRED)
 
 macro(construct_test name)
     add_executable(${name} ${ARGN})
-    target_link_libraries(${name} PRIVATE catch2::catch2_with_main fmt::fmt)
+    target_link_libraries(${name} PRIVATE Catch2::Catch2WithMain fmt::fmt)
     add_test(NAME ${name} COMMAND ${name})
 endmacro()
 
