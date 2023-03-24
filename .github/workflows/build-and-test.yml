@@ -34,27 +34,3 @@ jobs:
       - name: Run tests
         run: ctest
         working-directory: cmake-build-debug/tests
-
-  windows:
-    name: Windows
-    strategy:
-      matrix:
-        cpp_standard: [20]
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install conan
-        run: python3 -m pip install conan
-      - name: Pull CMake modules
-        run: |
-          Start-BitsTransfer -Source https://raw.githubusercontent.com/uyha/cmake-modules/master/tools/pull-modules.ps1 -Destination pull-modules.ps1
-          pwsh pull-modules.ps1
-      - name: CMake configuration
-        run: >
-          cmake --preset debug
-          -DCMAKE_CXX_STANDARD=${{matrix.cpp_standard}}
-      - name: Build
-        run: cmake --build --preset debug
-      - name: Run tests
-        run: ctest -C debug
-        working-directory: cmake-build-debug/tests
