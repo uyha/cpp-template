@@ -14,7 +14,9 @@
       "binaryDir": "${sourceDir}/cmake-build-${presetName}",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "USE_CONAN": "ON"
+        "USE_CONAN": "ON",
+        "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf",
+        "CONAN_AUTODETECT": "ON"
       },
       "environment": {}
     },
@@ -25,9 +27,7 @@
       "description": "Debug configuration with testing enabled",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "BUILD_TESTING": "ON",
-        "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf",
-        "CONAN_AUTODETECT": "ON"
+        "BUILD_TESTING": "ON"
       }
     },
     {
