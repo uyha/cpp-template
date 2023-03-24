@@ -20,8 +20,6 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install conan
         run: python3 -m pip install conan
-      - name: Create Conan profile
-        run: conan profile detect
       - name: Pull CMake modules
         run: curl -L https://raw.githubusercontent.com/uyha/cmake-modules/master/tools/pull-modules.sh | bash
       - name: CMake configuration
