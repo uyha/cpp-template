@@ -3,7 +3,12 @@ project("ProjectName"
         VERSION 1.0.0
         LANGUAGES CXX)
 
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+include(FetchContent)
+FetchContent_Declare(river
+                     GIT_REPOSITORY https://github.com/uyha/cmake-modules.git
+                     GIT_TAG v0.1.0)
+FetchContent_MakeAvailable(river)
+list(APPEND CMAKE_MODULE_PATH "${river_SOURCE_DIR}")
 
 add_subdirectory(include)
 add_subdirectory(src)
