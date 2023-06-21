@@ -12,7 +12,7 @@ BreakBeforeBinaryOperators: NonAssignment
 BreakConstructorInitializers: BeforeComma
 BreakInheritanceList: BeforeComma
 ColumnLimit: 120
-IncludeBlocks: Regroup
+IncludeBlocks: Preserve
 KeepEmptyLinesAtTheStartOfBlocks: false
 PenaltyBreakOpenParenthesis: 1000
 PenaltyReturnTypeOnItsOwnLine: 1000
