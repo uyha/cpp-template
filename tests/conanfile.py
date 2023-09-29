@@ -10,8 +10,8 @@ class ProjectNameTest(ConanFile):
 
     def requirements(self):
         dependencies = [
-            "fmt/9.1.0",
-            "catch2/3.3.2",
+            "fmt/10.1.1",
+            "catch2/3.4.0",
         ]
 
         for dep in dependencies:
