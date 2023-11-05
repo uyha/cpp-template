@@ -6,7 +6,7 @@ project("ProjectName"
 include(FetchContent)
 FetchContent_Declare(river
                      GIT_REPOSITORY https://github.com/uyha/cmake-modules.git
-                     GIT_TAG v0.1.1)
+                     GIT_TAG v0.2.0)
 FetchContent_MakeAvailable(river)
 list(APPEND CMAKE_MODULE_PATH "${river_SOURCE_DIR}")
 
