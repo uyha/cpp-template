@@ -10,7 +10,7 @@ class ProjectName(ConanFile):
 
     def requirements(self):
         dependencies = [
-            "fmt/10.1.1",
+            "fmt/10.2.1",
         ]
 
         for dep in dependencies:
