@@ -4,7 +4,6 @@ if(NOT BUILD_TESTING)
 endif()
 
 include(CompileOptions)
-include(Conan)
 
 find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)

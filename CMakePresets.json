@@ -12,11 +12,10 @@
       "description": "Default configuration with release build type, testing enabled, and conan used",
       "hidden": true,
       "binaryDir": "${sourceDir}/cmake-build-${presetName}",
+      "generator": "Ninja",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "USE_CONAN": "ON",
-        "CONAN_PROFILE_HOST": "${sourceDir}/data/conan/x86_64.conf",
-        "CONAN_AUTODETECT": "ON"
+        "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/cmake/conan_provider.cmake"
       },
       "environment": {}
     },

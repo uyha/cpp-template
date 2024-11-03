@@ -4,13 +4,14 @@
 from conan import ConanFile  # pylint: disable=import-error
 
 
-class ProjectName(ConanFile):
+class ProjectNameTest(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps"
 
     def requirements(self):
         dependencies = [
-            "fmt/10.2.1",
+            "fmt/11.0.2",
+            "catch2/3.7.1",
         ]
 
         for dep in dependencies:
