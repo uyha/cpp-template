@@ -5,8 +5,6 @@ A template for C++ projects
 .. figure:: https://github.com/uyha/cpp_template/workflows/C/C++%20CI/badge.svg
    :alt: C/C++ CI
 
-   C/C++ CI
-
 This is a template to start a new C++ project with dependency management
 built into it. Hence, it is opinionated about how dependency management
 of a C++ project can be done. This template uses ``conan`` to manage
